@@ -3,7 +3,7 @@ import json
 import pandas as pd
 from datetime import datetime
 
-with open('/home/leytonserver/host/host/config.json') as config_file:
+with open('/home/leytonserver/host/host3/config.json') as config_file:
     config = json.load(config_file)
 
 output_string = config["name"].replace(" ", "").lower()
