@@ -41,6 +41,7 @@ def get(linkID):
         score_human = 0
         score_ios = 0
         score_android = 0
+        test = test
     
     return {'human': score_human, 'iOS': score_ios, 'Android': score_android}
 
