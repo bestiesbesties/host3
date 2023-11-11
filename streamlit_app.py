@@ -2,14 +2,16 @@ import streamlit as st
 import pandas as pd
 from datetime import timedelta
 import json
-
+import datetime
 
 with open('config.json') as config_file:
     config = json.load(config_file)
 
 output_string = config["name"].replace(" ", "").lower()
 
-# page settings
+now = str(datetime.datetime.now().time()).split('.')[0][:4] + "0"
+
+##page settings
 st.set_page_config(
     page_title="Boostercard analytics",
     page_icon=":bar_chart:",
@@ -21,21 +23,18 @@ with open('style.css') as f:
 font_link = '<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">'
 st.markdown(font_link, unsafe_allow_html=True)
 
-# data
-scan_data = pd.read_csv(f'http://95.99.70.232:8000/shortapi_data_{output_string}.csv', sep=',', index_col=0)
-# Convert timestamp strings to datetime objects
+##data
+scan_data = pd.read_csv(f'scan_data.csv', sep=',')
 scan_data['timestamp'] = pd.to_datetime(scan_data['timestamp'])
 scans = scan_data.iloc[-1]
 
-review_data = pd.read_csv(f'http://95.99.70.232:8000/googleapi_data_{output_string}.csv', sep=',', index_col=0)
-# Convert timestamp strings to datetime objects
+review_data = pd.read_csv(f'review_data.csv', sep=',')
 review_data['timestamp'] = pd.to_datetime(review_data['timestamp'])
 reviews = review_data.iloc[-1]
 
-# Verify review integrity via saved logs
+##review integrity
 pre_scans_data = scan_data[['count', 'timestamp']]
 result_data = []
-
 for _, scan_row in pre_scans_data.iterrows():
     scan_timestamp = scan_row['timestamp']
     valid_passes = review_data[
@@ -65,36 +64,77 @@ for _, scan_row in pre_scans_data.iterrows():
                                           'time_difference'
                                           ])
 
+##body
 st.title(f'Hi, {config["name"]}!')
+st.write(f"Laatst geupdate {now}")
 # row a
 totals = scans['count']
 a1, a2 = st.columns(2)
 a1.metric(f"Totaal aantal scans", totals)
-a2.metric("Aantal reviews door Boostercards ", result_df.shape[0] ,int(reviews['count']))
+a2.metric("Aantal reviews door Boosters ", result_df.shape[0] ,int(reviews['count']))
 
 st.markdown("---")
 
-# row b
+##row b
 b1, b2, b3, b4, b5, b6 = st.columns(6)
 
 with b1:
     st.image('images/boostercard.png')
 with b2:
     name = "Boostercard 1"
-    st.metric(f"{name}", f"{int(scans['c1_human'])}")
+    st.metric(f"{name}", f"0")
     st.write(f"{'Scan' if int(scans['c1_human']) == 1 else 'Scans'}")
 with b3:
     st.image('images/boostercard.png')
 with b4:
     name = "Boostercard 2"
-    st.metric(f"{name}", f"{int(scans['c2_human'])}")
+    st.metric(f"{name}", f"0")
     st.write(f"{'Scan' if int(scans['c2_human']) == 1 else 'Scans'}")
-# with b5:
-#     st.image('images/boostercard.png')
-# with b6:
-#     name = "Boostercard 3"
-#     st.metric(f"{name}", f"{int(scans['c3_human'])}")
-#     st.write(f"{'Scan' if int(scans['c3_human']) == 1 else 'Scans'}")
+
+c1, c2, c3, c4, c5, c6 = st.columns(6)
+
+with c1:
+    st.image('images/boosterblock.png')
+with c2:
+    name = "Boosterblock 2"
+    st.metric(f"{name}", f"0")
+    st.write(f"{'Scan' if int(scans['c1_human']) == 1 else 'Scans'}")
+with c3:
+    st.image('images/boosterblock.png')
+with c4:
+    name = "Boosterblock 3"
+    st.metric(f"{name}", f"0")
+    st.write(f"{'Scan' if int(scans['c2_human']) == 1 else 'Scans'}")
+with c5:
+    st.image('images/boosterblock.png')
+with c6:
+    name = "Boosterblock 4"
+    st.metric(f"{name}", f"0")
+    st.write(f"{'Scan' if int(scans['c3_human']) == 1 else 'Scans'}")
+
+st.markdown("")
+st.markdown("")
+
+d1, d2, d3, d4, d5, d6 = st.columns(6)
+
+with d1:
+    st.image('images/boosterblock.png')
+with d2:
+    name = "Boosterblock 5"
+    st.metric(f"{name}", f"0")
+    st.write(f"{'Scan' if int(scans['c1_human']) == 1 else 'Scans'}")
+with d3:
+    st.image('images/boosterblock.png')
+with d4:
+    name = "Boosterblock 6"
+    st.metric(f"{name}", f"0")
+    st.write(f"{'Scan' if int(scans['c2_human']) == 1 else 'Scans'}")
+with d5:
+    st.image('images/boosterblock.png')
+with d6:
+    name = "Boosterblock 7"
+    st.metric(f"{name}", f"0")
+    st.write(f"{'Scan' if int(scans['c3_human']) == 1 else 'Scans'}")
 
 # c1, c2, c3 = st.columns((2,1,1))
 # with c1:
@@ -109,7 +149,7 @@ with b4:
 # with c3:
 #     c3.dataframe(review_data )
 
-# hide options
+## hide options
 hide_st_style = """
             <style>
             #MainMenu {visibility: hidden;}
