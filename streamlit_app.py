@@ -97,7 +97,7 @@ with c1:
     st.image('images/boosterblock.png')
 with c2:
     name = "Boosterblock 1"
-    st.metric(f"{name}", f"2")
+    st.metric(f"{name}", f"3")
     st.write(f"{'Scan' if int(scans['c1_human']) == 1 else 'Scans'}")
 with c3:
     st.image('images/boosterblock.png')
