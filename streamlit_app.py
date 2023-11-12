@@ -96,19 +96,19 @@ c1, c2, c3, c4, c5, c6 = st.columns(6)
 with c1:
     st.image('images/boosterblock.png')
 with c2:
-    name = "Boosterblock 2"
-    st.metric(f"{name}", f"0")
+    name = "Boosterblock 1"
+    st.metric(f"{name}", f"2")
     st.write(f"{'Scan' if int(scans['c1_human']) == 1 else 'Scans'}")
 with c3:
     st.image('images/boosterblock.png')
 with c4:
-    name = "Boosterblock 3"
+    name = "Boosterblock 2"
     st.metric(f"{name}", f"0")
     st.write(f"{'Scan' if int(scans['c2_human']) == 1 else 'Scans'}")
 with c5:
     st.image('images/boosterblock.png')
 with c6:
-    name = "Boosterblock 4"
+    name = "Boosterblock 3"
     st.metric(f"{name}", f"0")
     st.write(f"{'Scan' if int(scans['c3_human']) == 1 else 'Scans'}")
 
@@ -120,19 +120,19 @@ d1, d2, d3, d4, d5, d6 = st.columns(6)
 with d1:
     st.image('images/boosterblock.png')
 with d2:
-    name = "Boosterblock 5"
+    name = "Boosterblock 4"
     st.metric(f"{name}", f"0")
     st.write(f"{'Scan' if int(scans['c1_human']) == 1 else 'Scans'}")
 with d3:
     st.image('images/boosterblock.png')
 with d4:
-    name = "Boosterblock 6"
+    name = "Boosterblock 5"
     st.metric(f"{name}", f"0")
     st.write(f"{'Scan' if int(scans['c2_human']) == 1 else 'Scans'}")
 with d5:
     st.image('images/boosterblock.png')
 with d6:
-    name = "Boosterblock 7"
+    name = "Boosterblock 6"
     st.metric(f"{name}", f"0")
     st.write(f"{'Scan' if int(scans['c3_human']) == 1 else 'Scans'}")
 
