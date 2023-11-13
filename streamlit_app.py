@@ -71,7 +71,7 @@ st.write(f"Laatst geupdate {now}")
 totals = scans['count']
 a1, a2 = st.columns(2)
 a1.metric(f"Totaal aantal scans", totals - 57)
-a2.metric("Aantal reviews door Boosters ", result_df.shape[0] ,int(reviews['count'] - 399))
+a2.metric("Aantal reviews door Boosters ", result_df.shape[0] ,int(reviews['count'] - 398))
 
 st.markdown("---")
 
